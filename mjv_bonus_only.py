@@ -72,7 +72,7 @@ def preprocess_inputs_for_streamlit(input_data_dict):
     )
     df['machine_percentage_rpm'] = df['machine_percentage_rpm'].replace([np.inf, -np.inf], np.nan).fillna(1.0)
 
-    feature_columns = ['num_games', 'bb_rate', 'rb_rate', 'small_win_medals_per_game', 'machine_percentage_rpm']
+    feature_columns = ['num_games_simulated', 'bb_rate', 'rb_rate', 'small_win_medals_per_game', 'machine_percentage_rpm']
 
     # 特徴量が存在し、NaN/infがないことを確認
     for col in feature_columns:
