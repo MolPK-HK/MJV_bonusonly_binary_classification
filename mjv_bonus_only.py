@@ -28,7 +28,7 @@ def preprocess_inputs_for_streamlit(input_data_dict):
     df = pd.DataFrame([input_data_dict])
 
     required_keys_type = {
-        'num_games_simulated': int,
+        'num_games': int,
         'bb_count': int,
         'rb_count': int,
         'sashimai': int
@@ -48,7 +48,6 @@ def preprocess_inputs_for_streamlit(input_data_dict):
 
     # --- 5つの基本特徴量の計算 ---
     # 'num_games' は入力からそのまま使用
-    df['num_games'] = df['num_games_simulated']
     df['bb_rate'] = np.where(df['num_games'] > 0, df['bb_count'] / df['num_games'], 0)
     df['rb_rate'] = np.where(df['num_games'] > 0, df['rb_count'] / df['num_games'], 0)
 
@@ -72,7 +71,7 @@ def preprocess_inputs_for_streamlit(input_data_dict):
     )
     df['machine_percentage_rpm'] = df['machine_percentage_rpm'].replace([np.inf, -np.inf], np.nan).fillna(1.0)
 
-    feature_columns = ['num_games_simulated', 'bb_rate', 'rb_rate', 'small_win_medals_per_game', 'machine_percentage_rpm']
+    feature_columns = ['num_games', 'bb_rate', 'rb_rate', 'small_win_medals_per_game', 'machine_percentage_rpm']
 
     # 特徴量が存在し、NaN/infがないことを確認
     for col in feature_columns:
